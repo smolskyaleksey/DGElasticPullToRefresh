@@ -30,7 +30,7 @@ static char kPullToRefreshViewKey;
     DGElasticPullToRefreshView *pullToRefreshView = [DGElasticPullToRefreshView new];
     self.pullToRefreshView = pullToRefreshView;
     pullToRefreshView.actionHandler = actionHandler;
-    pullToRefreshView.loadingView = loadingView
+    pullToRefreshView.loadingView = loadingView;
     [self addSubview:pullToRefreshView];
     pullToRefreshView.observing = YES;
 }

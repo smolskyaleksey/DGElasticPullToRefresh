@@ -15,9 +15,9 @@ static NSString *const kFrame = @"frame";
 static NSString *const kPanGestureRecognizerState = @"panGestureRecognizer.state";
 
 
-CGFloat const kWaveMaxHeight = 70.0
-CGFloat const kMinOffsetToPull = 95.0
-CGFloat const kLoadingContentInset = 50.0
-CGFloat const kLoadingViewSize = 30.0
+CGFloat const kWaveMaxHeight = 70.0;
+CGFloat const kMinOffsetToPull = 95.0;
+CGFloat const kLoadingContentInset = 50.0;
+CGFloat const kLoadingViewSize = 30.0;
 
 #endif /* DGElasticPullToRefreshConstants_h */

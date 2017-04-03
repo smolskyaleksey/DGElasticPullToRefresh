@@ -38,26 +38,26 @@ static char observersArray;
 
 
 - (void)dg_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath {
-    NSDictionary *observerInfo = @{keyPath:observer};
+
     __block NSInteger foundIndex = -1;
     [[self dg_observers] enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
-        if (obj == observerInfo) {
+        if ([obj objectForKey:keyPath] != nil) {
             foundIndex = idx;
             *stop = YES;
         }
     }];
     
     if (foundIndex == -1) {
+        NSDictionary *observerInfo = @{keyPath:observer};
         [[self dg_observers] addObject:observerInfo];
         [self addObserver:observer forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:nil];
     }
 }
 
 - (void)dg_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath {
-    NSDictionary *observerInfo = @{keyPath:observer};
     NSMutableIndexSet *indexs = [NSMutableIndexSet new];
     [[self dg_observers] enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
-        if (obj == observerInfo) {
+        if ([obj objectForKey:keyPath] != nil) {
             [indexs addIndex:idx];
             [self removeObserver:observer forKeyPath:keyPath];
         }

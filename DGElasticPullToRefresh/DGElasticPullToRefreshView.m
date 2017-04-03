@@ -7,7 +7,6 @@
 //
 
 #import "DGElasticPullToRefreshView.h"
-#import "DGElasticPullToRefreshLoadingView.h"
 #import "DGElasticPullToRefreshConstants.h"
 #import "UIView+DGElasticPullToRefreshExtensions.h"
 #import "UIScrollView+DGElasticPullToRefreshExtensions.h"
@@ -37,10 +36,6 @@ typedef NS_ENUM (NSInteger,DGElasticPullToRefreshState) {
 
 @property (nonatomic, assign) DGElasticPullToRefreshState state;
 @property (nonatomic, assign) CGFloat originalContentInsetTop;
-@property (nonatomic, strong) DGElasticPullToRefreshLoadingView *loadingView;
-@property (nonatomic, strong) UIColor *fillColor;
-@property (nonatomic, copy) void (^actionHandler)();
-@property (nonatomic, assign) BOOL observing;
 @end
 
 
@@ -112,7 +107,7 @@ typedef NS_ENUM (NSInteger,DGElasticPullToRefreshState) {
         scroll.contentOffset = contentOffset;
         height = scroll.contentInset.top - self.originalContentInsetTop;
         
-        self.frame = CGRectMake(0, 0, width, height);
+        self.frame = CGRectMake(0,  -height - 1.0, width, height);
     } else if (self.state == DGElasticPullToRefreshStateAnimatingToStopped) {
         height = [self actualContentOffsetY];
     }
@@ -251,7 +246,7 @@ typedef NS_ENUM (NSInteger,DGElasticPullToRefreshState) {
     if (scroll == nil) {
         return 0.0;
     }
-    MAX(-self.originalContentInsetTop - scroll.contentOffset.y, 0);
+    return MAX(-self.originalContentInsetTop - scroll.contentOffset.y, 0);
 }
 
 - (CGFloat)currentWaveHeight {
